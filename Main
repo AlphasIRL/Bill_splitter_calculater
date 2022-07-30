@@ -1,0 +1,48 @@
+from random import choice
+
+
+def lucky(dictionary, user_input):
+    if user_input == "Yes":
+        rand_choice = choice(list(dictionary.keys()))
+        print()
+        print(f"{rand_choice} is the lucky one!")
+        print()
+        return rand_choice
+    else:
+        print()
+        print("No one is going to be lucky")
+        print()
+
+
+print("Enter the number of friends joining (including you):")
+
+num_ppl = input(" ")
+print()
+if not num_ppl.isdigit() or int(num_ppl) <= 0:
+    print()
+    print("No one is joining for the party")
+else:
+    num_ppl = int(num_ppl)
+    print("Enter the name of every friend (including you), each on a new line:")
+    person_dict = {}
+    for i in range(num_ppl):
+        person = input(" ")
+        person_dict[person] = 0
+    print()
+    print("Enter the total bill value:")
+    total_cost = int(input(" "))
+    print()
+    print('Do you want to use the "Who is lucky?" feature? Write Yes/No:')
+    user_choice = input(" ")
+    lucky_person = lucky(person_dict, user_choice)
+    if user_choice == "Yes":
+        person_cost = round(total_cost / (num_ppl - 1), 2)
+        for key in person_dict:
+            person_dict[key] = person_cost
+        person_dict[lucky_person] = 0
+        print(person_dict)
+    else:
+        person_cost = round(total_cost / num_ppl, 2)
+        for key in person_dict:
+            person_dict[key] = person_cost
+        print(person_dict)
